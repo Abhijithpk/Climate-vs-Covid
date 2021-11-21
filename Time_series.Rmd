@@ -1,0 +1,92 @@
+title: "Kannur's climate vs covid numbers analysis"
+author:"Abhijith PK"
+output: html_notebook
+---
+
+```{r}
+# Creating a dataframe
+df <- read.csv("C:\\Users\\Abhijith P K\\Downloads\\Kannur.csv", header = TRUE)
+df
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+# To view data in tabular form
+View(df)
+```
+
+```{r}
+# Dimensions
+dim(df)
+```
+
+```{r}
+# To check the datatype of each column in df
+str(df)
+```
+
+```{r}
+summary(df)
+```
+```{r}
+# Date column
+str(df$DATE)
+```
+
+
+```{r}
+# Converting to date format
+x <- as.Date(df$DATE)
+head(x)
+class(x)
+str(x)
+```
+```{r}
+# Creating year, month, day columns
+year <- as.numeric(format(x,'%Y'))
+head(year)
+month <- as.numeric(format(x,'%m'))
+head(month)
+day <- as.numeric(format(x,'%d'))
+head(day)
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+# Add columns to the existing df
+df <- cbind(df,year,month,day)
+head(df)
+```
+
+```{r}
+summary(df)
+```
+
+
+```{r}
+# Time Series - Germany's daily electricity consumption 
+plot(df[,2], xlab = "day", ylab = "QV2M", type = 'l',
+     main = "Specific Humidity ", col = 'turquoise')
+```
+
+```{r}
+# Solar
+plot(df[,3], xlab = "day", ylab = "RH2M", type = 'l', main="Relative Humidity", col = 'red')
+```
+
+```{r}
+# Wind
+plot(df [,4], xlab = "day", ylab = "PRECTOTCORR", type = 'l', main="Precipitation", col = 'red')
+```
+
+
+
+```{r}
+plot(df [,5], xlab = "day", ylab = "T2M", type = 'l', main="Temperature", col = 'black')
+```
